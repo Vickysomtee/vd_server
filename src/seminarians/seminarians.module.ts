@@ -5,7 +5,7 @@ import { SeminariansController } from './seminarians.controller';
 import { SeminarianService } from './seminarians.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Seminarians])],  
+  imports: [TypeOrmModule.forFeature([Seminarians])],
   controllers: [SeminariansController],
   providers: [
     {

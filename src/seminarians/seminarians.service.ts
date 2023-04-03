@@ -6,19 +6,17 @@ import { CreateSeminarianDto } from './dtos/CreateSeminarian.dto';
 
 @Injectable()
 export class SeminarianService {
-    constructor (
-        @InjectRepository(Seminarians)
-        private readonly seminarianRepository: Repository<Seminarians>
-    ) {}
+  constructor(
+    @InjectRepository(Seminarians)
+    private readonly seminarianRepository: Repository<Seminarians>,
+  ) {}
 
-    get() {
-       return this.seminarianRepository.find()
-    }
+  get() {
+    return this.seminarianRepository.find();
+  }
 
-    create(seminarian: CreateSeminarianDto) {
-        const newSeminarian = this.seminarianRepository.create(seminarian);
-        return this.seminarianRepository.
-        save(newSeminarian);
-    }
-
+  create(seminarian: CreateSeminarianDto) {
+    const newSeminarian = this.seminarianRepository.create(seminarian);
+    return this.seminarianRepository.save(newSeminarian);
+  }
 }
