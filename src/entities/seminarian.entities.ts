@@ -1,5 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+import { PastoralDuties } from 'src/seminarians/dtos/PastoralDuties.dto';
+
+
 @Entity()
 export class Seminarians {
   @PrimaryGeneratedColumn('increment')
@@ -63,8 +66,16 @@ export class Seminarians {
 
   @Column({
     name: 'formation_status',
-    nullable: false,
+    nullable: true,
     default: '',
   })
   formation_status: string;
+
+
+  @Column({
+    type: 'json',
+    name: 'pastorial_duties',
+    nullable: true,
+  })
+  pastoral_duties: PastoralDuties[]
 }

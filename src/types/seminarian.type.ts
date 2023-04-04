@@ -8,4 +8,10 @@ export interface Seminarian {
   seminary: string;
   class: string;
   formation_year: string;
+  pastoral_duties: object[]
+}
+
+export interface PlaceOfDuties {
+  class: string,
+  place: string,
 }

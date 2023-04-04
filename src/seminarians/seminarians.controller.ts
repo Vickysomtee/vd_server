@@ -22,7 +22,7 @@ export class SeminariansController {
     return this.seminarianService.get();
   }
 
-  @Post('create')
+  @Post()
   @UsePipes(ValidationPipe)
   createSeminarian(@Body() creatSeminarianDto: CreateSeminarianDto) {
     return this.seminarianService.create(creatSeminarianDto);
