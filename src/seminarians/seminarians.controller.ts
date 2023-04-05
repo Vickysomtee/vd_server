@@ -4,9 +4,13 @@ import {
   Get,
   Inject,
   Post,
+  UploadedFile,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Express } from 'express';
 
 import { CreateSeminarianDto } from './dtos/CreateSeminarian.dto';
 import { SeminarianService } from './seminarians.service';
@@ -22,9 +26,20 @@ export class SeminariansController {
     return this.seminarianService.get();
   }
 
+  @Post('upload_image')
+  @UsePipes(ValidationPipe)
+  @UseInterceptors(FileInterceptor('profile_image'))
+  uploadSeminarianImage(@UploadedFile() file: Express.Multer.File) {
+    console.log(file)
+    return this.seminarianService.uploadImage(file);
+  }
+
   @Post()
   @UsePipes(ValidationPipe)
-  createSeminarian(@Body() creatSeminarianDto: CreateSeminarianDto) {
+  createSeminarian(
+    @Body() creatSeminarianDto: CreateSeminarianDto,
+  ) {
+
     return this.seminarianService.create(creatSeminarianDto);
   }
 }

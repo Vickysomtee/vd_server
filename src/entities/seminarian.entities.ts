@@ -77,5 +77,12 @@ export class Seminarians {
     name: 'pastorial_duties',
     nullable: true,
   })
-  pastoral_duties: PastoralDuties[]
+  pastoral_duties: PastoralDuties[];
+
+  @Column({
+    name: 'profile_image',
+    nullable: false,
+    default: '',
+  })
+  profile_image: string;
 }

@@ -39,4 +39,8 @@ export class CreateSeminarianDto {
 
   @IsArray()
   pastoral_duties: PastoralDuties[]
+
+  @IsNotEmpty()
+  @IsString()
+  profile_image: string;
 }
