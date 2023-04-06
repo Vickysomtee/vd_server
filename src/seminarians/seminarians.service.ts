@@ -19,14 +19,11 @@ export class SeminarianService {
   }
 
   async uploadImage(file: Express.Multer.File) {
-    await this.cloudinary.uploadImage(file).catch(() => {
+    const response = await this.cloudinary.uploadImage(file).catch(() => {
       throw new BadGatewayException('Invalid file type.');
     });
 
-    const url = await this.cloudinary.getImage(file)
-    console.log(url)
-
-    return {url}
+    return {url: response.secure_url, file_ext: response.format}
   }
 
   async create(seminarian: CreateSeminarianDto) {
