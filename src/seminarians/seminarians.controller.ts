@@ -30,7 +30,6 @@ export class SeminariansController {
   @UsePipes(ValidationPipe)
   @UseInterceptors(FileInterceptor('profile_image'))
   uploadSeminarianImage(@UploadedFile() file: Express.Multer.File) {
-    console.log(file)
     return this.seminarianService.uploadImage(file);
   }
 

@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { PastoralDuties } from './PastoralDuties.dto';
 
 export class CreateSeminarianDto {
@@ -13,6 +13,10 @@ export class CreateSeminarianDto {
   @IsNotEmpty()
   @IsString()
   parish: string;
+
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
   @IsNotEmpty()
   @IsString()
@@ -43,4 +47,12 @@ export class CreateSeminarianDto {
   @IsNotEmpty()
   @IsString()
   profile_image: string;
+
+  @IsNotEmpty()
+  @IsArray()
+  talent_interest: string[];
+
+  @IsNotEmpty()
+  @IsArray()
+  certifications: string[];
 }

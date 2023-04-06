@@ -2,7 +2,6 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 import { PastoralDuties } from 'src/seminarians/dtos/PastoralDuties.dto';
 
-
 @Entity()
 export class Seminarians {
   @PrimaryGeneratedColumn('increment')
@@ -28,6 +27,13 @@ export class Seminarians {
     default: '',
   })
   parish: string;
+
+  @Column({
+    name: 'email',
+    nullable: false,
+    default: '',
+  })
+  email: string;
 
   @Column({
     name: 'dob',
@@ -71,7 +77,6 @@ export class Seminarians {
   })
   formation_status: string;
 
-
   @Column({
     type: 'json',
     name: 'pastorial_duties',
@@ -85,4 +90,16 @@ export class Seminarians {
     default: '',
   })
   profile_image: string;
+
+  @Column('simple-array', {
+    name: 'talent_interest',
+    nullable: true,
+  })
+  talent_interest: string[];
+
+  @Column('simple-array', {
+    name: 'certifications',
+    nullable: true,
+  })
+  certifications: string[];
 }
