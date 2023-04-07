@@ -1,5 +1,11 @@
 import { Repository } from 'typeorm';
-import { BadGatewayException, Injectable } from '@nestjs/common';
+import {
+  BadGatewayException,
+  ForbiddenException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Seminarians } from 'src/entities/seminarian.entities';
@@ -19,15 +25,20 @@ export class SeminarianService {
   }
 
   async uploadImage(file: Express.Multer.File) {
-    const response = await this.cloudinary.uploadImage(file).catch(() => {
-      throw new BadGatewayException('Invalid file type.');
-    });
+    const response = await this.cloudinary.uploadImage(file);
 
-    return {url: response.secure_url, file_ext: response.format}
+    return { status_code:HttpStatus.CREATED, url: response.secure_url, file_ext: response.format };
   }
 
-  async create(seminarian: CreateSeminarianDto) {
-    const newSeminarian = this.seminarianRepository.create(seminarian);
-    return this.seminarianRepository.save(newSeminarian);
+  async create(seminarianDTO: CreateSeminarianDto) {
+    const seminarian = await this.seminarianRepository.findOneBy({
+      email: seminarianDTO.email,
+    });
+    if (seminarian)
+      throw new HttpException('User already exists', HttpStatus.FORBIDDEN);
+    const newSeminarian = this.seminarianRepository.create(seminarianDTO);
+    const data = await this.seminarianRepository.save(newSeminarian);
+
+    return { message: 'Success', status_code: HttpStatus.CREATED, data };
   }
 }

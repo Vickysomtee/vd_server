@@ -35,10 +35,7 @@ export class SeminariansController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  createSeminarian(
-    @Body() creatSeminarianDto: CreateSeminarianDto,
-  ) {
-
+  createSeminarian(@Body() creatSeminarianDto: CreateSeminarianDto) {
     return this.seminarianService.create(creatSeminarianDto);
   }
 }
