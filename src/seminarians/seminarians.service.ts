@@ -27,7 +27,7 @@ export class SeminarianService {
   async uploadImage(file: Express.Multer.File) {
     const response = await this.cloudinary.uploadImage(file);
 
-    return { status_code:HttpStatus.CREATED, url: response.secure_url, file_ext: response.format };
+    return { status_code: HttpStatus.CREATED, message: 'Success', url: response.secure_url, file_ext: response.format };
   }
 
   async create(seminarianDTO: CreateSeminarianDto) {
