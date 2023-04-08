@@ -1,12 +1,13 @@
-import { IsArray, IsNotEmpty } from 'class-validator';
+import { IsArray, IsNotEmpty, IsObject, IsString } from 'class-validator';
 
-import type {PlaceOfDuties} from '../../types/seminarian.type'
 
 export class PastoralDuties {
   @IsNotEmpty()
+  @IsString()
   seminary: string;
 
   @IsNotEmpty()
-  place_of_duties: PlaceOfDuties[]
+  @IsObject()
+  places_of_duty: object;
 
 }

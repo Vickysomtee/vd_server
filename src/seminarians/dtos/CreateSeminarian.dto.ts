@@ -42,7 +42,7 @@ export class CreateSeminarianDto {
   formation_status: string;
 
   @IsArray()
-  pastoral_duties: PastoralDuties[]
+  pastoral_duties: PastoralDuties[];
 
   @IsNotEmpty()
   @IsString()

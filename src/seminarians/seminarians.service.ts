@@ -1,7 +1,5 @@
 import { Repository } from 'typeorm';
 import {
-  BadGatewayException,
-  ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,

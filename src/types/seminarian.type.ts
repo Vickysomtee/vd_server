@@ -1,4 +1,4 @@
-export interface PlaceOfDuties {
-  class: string
-  place: string
-}
+// export interface newSeminarian {
+//   class: string
+//   place: string
+// }
