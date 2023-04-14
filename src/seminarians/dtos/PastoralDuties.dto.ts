@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsObject, IsString } from 'class-validator';
+import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 
 
 export class PastoralDuties {
@@ -8,6 +8,6 @@ export class PastoralDuties {
 
   @IsNotEmpty()
   @IsObject()
-  places_of_duty: object;
+  places_of_duties: object;
 
 }

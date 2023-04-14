@@ -10,70 +10,66 @@ export class Seminarians {
   @Column({
     name: 'first_name',
     nullable: false,
-    default: '',
   })
   first_name: string;
 
   @Column({
     name: 'last_name',
     nullable: false,
-    default: '',
   })
   last_name: string;
 
   @Column({
     name: 'parish',
     nullable: false,
-    default: '',
   })
   parish: string;
 
   @Column({
     name: 'email',
     nullable: false,
-    default: '',
   })
   email: string;
 
   @Column({
     name: 'dob',
     nullable: false,
-    default: '',
   })
-  dob: string;
+  dob: Date;
 
   @Column({
     name: 'state_origin',
     nullable: false,
-    default: '',
   })
   state_origin: string;
 
   @Column({
     name: 'admission_year',
     nullable: false,
-    default: '',
   })
   admission_year: string;
 
   @Column({
     name: 'seminary',
     nullable: false,
-    default: '',
   })
   seminary: string;
 
   @Column({
-    name: 'class',
+    name: 'seminary_level',
     nullable: false,
-    default: '',
   })
-  class: string;
+  seminary_level: string;
+
+  @Column({
+    name: 'current_class',
+    nullable: false,
+  })
+  current_class: string;
 
   @Column({
     name: 'formation_status',
     nullable: true,
-    default: '',
   })
   formation_status: string;
 
@@ -87,7 +83,6 @@ export class Seminarians {
   @Column({
     name: 'profile_image',
     nullable: false,
-    default: '',
   })
   profile_image: string;
 
