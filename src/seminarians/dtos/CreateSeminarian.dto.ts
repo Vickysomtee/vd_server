@@ -19,6 +19,7 @@ export class CreateSeminarianDto {
   email: string;
 
   @IsNotEmpty()
+  @IsDate()
   @IsDateString()
   dob: Date;
 
@@ -37,12 +38,8 @@ export class CreateSeminarianDto {
   @IsString()
   seminary_level: string;
 
-  @IsNotEmpty()
   @IsString()
   current_class: string;
-
-  @IsString()
-  formation_status: string;
 
   @IsArray()
   pastoral_duties: PastoralDuties[];
