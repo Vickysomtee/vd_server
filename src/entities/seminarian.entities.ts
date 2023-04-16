@@ -63,7 +63,7 @@ export class Seminarians {
 
   @Column({
     name: 'current_class',
-    nullable: false,
+    nullable: true,
   })
   current_class: string;
 
