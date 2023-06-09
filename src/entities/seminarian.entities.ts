@@ -1,6 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 import { PastoralDuties } from 'src/seminarians/dtos/PastoralDuties.dto';
+import { SeminaryDTO } from 'src/seminarians/dtos/Seminary.dto';
 
 @Entity()
 export class Seminarians {
@@ -50,10 +51,11 @@ export class Seminarians {
   admission_year: string;
 
   @Column({
+    type: 'json',
     name: 'seminary',
     nullable: false,
   })
-  seminary: string;
+  seminary: SeminaryDTO;
 
   @Column({
     name: 'seminary_level',

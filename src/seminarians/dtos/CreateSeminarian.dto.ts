@@ -1,5 +1,6 @@
-import { IsArray, IsDateString, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsDateString, IsEmail, IsNotEmpty, IsObject, IsString } from 'class-validator';
 import { PastoralDuties } from './PastoralDuties.dto';
+import { SeminaryDTO } from './Seminary.dto';
 
 export class CreateSeminarianDto {
   @IsNotEmpty()
@@ -32,8 +33,8 @@ export class CreateSeminarianDto {
   admission_year: string;
 
   @IsNotEmpty()
-  @IsString()
-  seminary: string;
+  @IsObject()
+  seminary: SeminaryDTO;
 
   @IsString()
   seminary_level: string;
