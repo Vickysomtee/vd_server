@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Seminarians } from 'src/entities/seminarian.entities';
+import { Seminarians } from '../entities/seminarian.entities';
 import { CreateSeminarianDto } from './dtos/CreateSeminarian.dto';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class SeminarianService {
