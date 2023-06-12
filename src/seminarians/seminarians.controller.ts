@@ -3,7 +3,10 @@ import {
   Controller,
   Get,
   Inject,
+  Param,
   Post,
+  Put,
+  Query,
   UploadedFile,
   UseInterceptors,
   UsePipes,
@@ -22,8 +25,13 @@ export class SeminariansController {
   ) {}
 
   @Get()
-  getSeminarians() {
-    return this.seminarianService.get();
+  getSeminarians(@Query() query) {
+    return this.seminarianService.get(query);
+  }
+
+  @Get(':id')
+  getSeminarian(@Param() param) {
+    return this.seminarianService.getOne(param.id)
   }
 
   @Post('upload_image')
@@ -37,5 +45,11 @@ export class SeminariansController {
   @UsePipes(ValidationPipe)
   createSeminarian(@Body() creatSeminarianDto: CreateSeminarianDto) {
     return this.seminarianService.create(creatSeminarianDto);
+  }
+
+  @Put(':id')
+  @UsePipes(ValidationPipe)
+  updateSeminarian(@Body() data: CreateSeminarianDto, @Param() params) {
+    return this.seminarianService.update(params.id, data)
   }
 }
