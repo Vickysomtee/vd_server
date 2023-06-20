@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { PastoralDuties } from 'src/seminarians/dtos/PastoralDuties.dto';
-import { SeminaryDTO } from 'src/seminarians/dtos/Seminary.dto';
+import { PastoralDuties } from 'src/modules/seminarians/dtos/PastoralDuties.dto';
+import { SeminaryDTO } from 'src/modules/seminarians/dtos/Seminary.dto';
 
 @Entity()
 export class Seminarians {
@@ -29,6 +29,7 @@ export class Seminarians {
   @Column({
     name: 'email',
     nullable: false,
+    unique: true,
   })
   email: string;
 

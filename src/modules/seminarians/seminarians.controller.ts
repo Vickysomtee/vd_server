@@ -8,12 +8,14 @@ import {
   Put,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
+import { AtGuard } from 'src/common/guards/access_token.guard';
 
 import { CreateSeminarianDto } from './dtos/CreateSeminarian.dto';
 import { SeminarianService } from './seminarians.service';
@@ -24,6 +26,7 @@ export class SeminariansController {
     @Inject('SEMINARIAN_SERVICE') private seminarianService: SeminarianService,
   ) {}
 
+  @UseGuards(AtGuard)
   @Get()
   getSeminarians(@Query() query) {
     return this.seminarianService.get(query);

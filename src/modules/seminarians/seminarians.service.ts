@@ -2,10 +2,10 @@ import { Repository } from 'typeorm';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Seminarians } from '../entities/seminarian.entities';
+import { Seminarians } from '../../entities/seminarian.entities';
 import { CreateSeminarianDto } from './dtos/CreateSeminarian.dto';
 import { UpdateSeminarianDto } from './dtos/UpdateSeminarian.dto';
-import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { CloudinaryService } from '../../cloudinary/cloudinary.service';
 
 @Injectable()
 export class SeminarianService {
@@ -47,6 +47,7 @@ export class SeminarianService {
     });
     if (seminarian)
       throw new HttpException('User already exists', HttpStatus.FORBIDDEN);
+      
     const newSeminarian = this.seminarianRepository.create(seminarianDTO);
     const data = await this.seminarianRepository.save(newSeminarian);
 

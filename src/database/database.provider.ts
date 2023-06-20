@@ -4,6 +4,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import {config} from 'dotenv'
 
 import { Seminarians } from 'src/entities/seminarian.entities';
+import { Admins } from 'src/entities/admin.entities';
 
 config()
 
@@ -17,7 +18,7 @@ export const typeOrmConfig: DataSourceOptions = {
   password: configService.get('DB_PASSWORD'),
   database: configService.get('DB_NAME'),
   // ssl: true,
-  entities: [Seminarians,],
+  entities: [Seminarians, Admins],
   migrations: ['dist/database/migrations/*.js'],
   synchronize: true,
 }
