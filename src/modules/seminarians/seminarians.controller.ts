@@ -15,6 +15,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
+import { Public } from 'src/common/decorators/public.decorator';
 import { AtGuard } from 'src/common/guards/access_token.guard';
 
 import { CreateSeminarianDto } from './dtos/CreateSeminarian.dto';
@@ -32,11 +33,13 @@ export class SeminariansController {
     return this.seminarianService.get(query);
   }
 
+  @UseGuards(AtGuard)
   @Get(':id')
   getSeminarian(@Param() param) {
     return this.seminarianService.getOne(param.id)
   }
 
+  @Public()
   @Post('upload_image')
   @UsePipes(ValidationPipe)
   @UseInterceptors(FileInterceptor('profile_image'))
@@ -44,12 +47,14 @@ export class SeminariansController {
     return this.seminarianService.uploadImage(file);
   }
 
+  @Public()
   @Post()
   @UsePipes(ValidationPipe)
   createSeminarian(@Body() creatSeminarianDto: CreateSeminarianDto) {
     return this.seminarianService.create(creatSeminarianDto);
   }
 
+  @UseGuards(AtGuard)
   @Put(':id')
   @UsePipes(ValidationPipe)
   updateSeminarian(@Body() data: CreateSeminarianDto, @Param() params) {

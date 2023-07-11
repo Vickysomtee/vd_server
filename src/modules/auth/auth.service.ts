@@ -2,8 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { AdminService } from '../admin/admin.service';
-import { Admins } from 'src/entities/admin.entities';
+import { Admins } from '../../entities/admin.entities';
 import { RegisterDto, LoginDto } from './dtos/auth.dto';
 import { Token } from 'src/types';
 import { JwtService } from '@nestjs/jwt';
@@ -14,7 +13,6 @@ export class AuthService {
   constructor(
     @InjectRepository(Admins)
     private readonly adminRepository: Repository<Admins>,
-    private adminService: AdminService,
     private jwtService: JwtService,
   ) {}
 

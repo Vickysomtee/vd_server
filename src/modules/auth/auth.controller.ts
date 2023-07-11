@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { Public } from 'src/common/decorators/public.decorator';
+import { Public } from '../../common/decorators/public.decorator';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dtos/auth.dto';
 
@@ -20,6 +20,7 @@ export class AuthController {
     return this.authService.login(loginDto)
   }
 
+  
   @Post('logout')
   logout() {
     return this.authService.logout()
