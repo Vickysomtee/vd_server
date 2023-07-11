@@ -9,6 +9,8 @@ import { SeminariansModule } from './modules/seminarians/seminarians.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common/guards/access_token.guard';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -19,12 +21,13 @@ import { AtGuard } from './common/guards/access_token.guard';
     SeminariansModule,
     CloudinaryModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: AtGuard
     },
+    AppService
   ],
 })
 export class AppModule {}
