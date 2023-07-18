@@ -4,7 +4,7 @@ import { IsNotEmpty, IsObject, IsString } from 'class-validator';
 export class PastoralDuties {
   @IsNotEmpty()
   @IsString()
-  seminary: string;
+  seminary_level: string;
 
   @IsNotEmpty()
   @IsObject()

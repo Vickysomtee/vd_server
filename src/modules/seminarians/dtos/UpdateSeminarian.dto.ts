@@ -33,8 +33,8 @@ export class UpdateSeminarianDto {
   admission_year: string;
 
   @IsOptional()
-  @IsObject()
-  seminary: SeminaryDTO;
+  @IsString()
+  seminary: string;
 
   @IsOptional()
   @IsString()
