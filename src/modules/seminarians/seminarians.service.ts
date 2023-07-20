@@ -46,7 +46,7 @@ export class SeminarianService {
       email: seminarianDTO.email,
     });
     if (seminarian)
-      throw new HttpException('User already exists', HttpStatus.FORBIDDEN);
+      throw new HttpException('Your details already exists', HttpStatus.FORBIDDEN);
       
     const newSeminarian = this.seminarianRepository.create(seminarianDTO);
     const data = await this.seminarianRepository.save(newSeminarian);
