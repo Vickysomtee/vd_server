@@ -4,7 +4,7 @@ import { PastoralDuties } from 'src/modules/seminarians/dtos/PastoralDuties.dto'
 
 @Entity()
 export class Seminarians {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({

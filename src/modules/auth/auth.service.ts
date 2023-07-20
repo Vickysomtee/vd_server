@@ -45,7 +45,7 @@ export class AuthService {
       id: newAdmin.id,
     });
 
-    return { message: 'Success', status_code: HttpStatus.CREATED, token};
+    return { message: 'Success', statusCode: HttpStatus.CREATED, token};
   }
 
   async login(loginDto: LoginDto) {
@@ -68,7 +68,7 @@ export class AuthService {
       id: admin.id,
     });
 
-    return { message: 'Success', status_code: HttpStatus.OK, access_token: token };
+    return { message: 'Success', statusCode: HttpStatus.OK, access_token: token };
   }
 
   async logout() {}

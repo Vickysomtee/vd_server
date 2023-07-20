@@ -27,14 +27,14 @@ export class SeminarianService {
         'Seminarian does not exist',
         HttpStatus.NOT_FOUND,
       );
-    return { message: 'Success', status_code: HttpStatus.OK, seminarian };
+    return { message: 'Success', statusCode: HttpStatus.OK, seminarian };
   }
 
   async uploadImage(file: Express.Multer.File) {
     const response = await this.cloudinary.uploadImage(file);
 
     return {
-      status_code: HttpStatus.CREATED,
+      statusCode: HttpStatus.CREATED,
       message: 'Success',
       url: response.secure_url,
       file_ext: response.format,
@@ -51,7 +51,7 @@ export class SeminarianService {
     const newSeminarian = this.seminarianRepository.create(seminarianDTO);
     const data = await this.seminarianRepository.save(newSeminarian);
 
-    return { message: 'Success', status_code: HttpStatus.CREATED, data };
+    return { message: 'Success', statusCode: HttpStatus.CREATED, data };
   }
 
   async update(id: number, seminarianDTO: UpdateSeminarianDto) {
@@ -67,6 +67,6 @@ export class SeminarianService {
 
     const data = await this.seminarianRepository.save(seminarian);
 
-    return { message: 'Success', status_code: HttpStatus.OK, data };
+    return { message: 'Success', statusCode: HttpStatus.OK, data };
   }
 }
