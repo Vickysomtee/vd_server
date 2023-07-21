@@ -40,11 +40,11 @@ export class SeminariansController {
   }
 
   @Public()
-  @Post('upload_image')
+  @Post('upload_image/:email')
   @UsePipes(ValidationPipe)
   @UseInterceptors(FileInterceptor('profile_image'))
-  uploadSeminarianImage(@UploadedFile() file: Express.Multer.File) {
-    return this.seminarianService.uploadImage(file);
+  uploadSeminarianImage(@UploadedFile() file: Express.Multer.File, @Param() param) {
+    return this.seminarianService.uploadImage(file, param.email);
   }
 
   @Public()
@@ -52,13 +52,6 @@ export class SeminariansController {
   @UsePipes(ValidationPipe)
   createSeminarian(@Body() creatSeminarianDto: CreateSeminarianDto) {
     return this.seminarianService.create(creatSeminarianDto);
-  }
-
-  @Public()
-  @Post('verify_seminarian')
-  @UsePipes(ValidationPipe)
-  getByEmail(@Body() email: string) {
-    return this.seminarianService.findByEmail(email)
   }
 
   @UseGuards(AtGuard)

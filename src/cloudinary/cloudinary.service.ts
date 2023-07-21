@@ -10,12 +10,12 @@ export class CloudinaryService {
   ): Promise<UploadApiResponse | UploadApiErrorResponse> {
     return new Promise((resolve, reject) => {
       const upload = v2.uploader.upload_stream(
-        { folder: 'vd_portal', resource_type: 'auto' },
+        { folder: 'vd_portal', resource_type: 'auto', allowed_formats: ['png', 'jpg', 'jpeg'] },
         (error, result) => {
-          if (error) return reject(error);
-          resolve(result);
+          if (error) reject(error)
+          resolve(result)
         },
-      );
+      )
 
       toStream(file.buffer).pipe(upload);
     });

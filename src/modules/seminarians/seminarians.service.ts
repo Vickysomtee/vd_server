@@ -30,7 +30,7 @@ export class SeminarianService {
     return { message: 'Success', statusCode: HttpStatus.OK, seminarian };
   }
 
-  async findByEmail(email: string) {
+  async uploadImage(file: Express.Multer.File, email: string) {
     const seminarian = await this.seminarianRepository.findOneBy({ email });
 
     if (seminarian)
@@ -38,9 +38,6 @@ export class SeminarianService {
         'Your details already exists',
         HttpStatus.FORBIDDEN,
       );
-  }
-
-  async uploadImage(file: Express.Multer.File) {
     const response = await this.cloudinary.uploadImage(file);
 
     return {
