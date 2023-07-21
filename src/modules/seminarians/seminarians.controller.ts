@@ -55,7 +55,7 @@ export class SeminariansController {
   }
 
   @Public()
-  @Post()
+  @Post('verify_seminarian')
   @UsePipes(ValidationPipe)
   getByEmail(@Body() email: string) {
     return this.seminarianService.findByEmail(email)
