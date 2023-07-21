@@ -30,6 +30,16 @@ export class SeminarianService {
     return { message: 'Success', statusCode: HttpStatus.OK, seminarian };
   }
 
+  async findByEmail(email: string) {
+    const seminarian = await this.seminarianRepository.findOneBy({ email });
+
+    if (seminarian)
+      throw new HttpException(
+        'Your details already exists',
+        HttpStatus.FORBIDDEN,
+      );
+  }
+
   async uploadImage(file: Express.Multer.File) {
     const response = await this.cloudinary.uploadImage(file);
 
@@ -42,12 +52,6 @@ export class SeminarianService {
   }
 
   async create(seminarianDTO: CreateSeminarianDto) {
-    const seminarian = await this.seminarianRepository.findOneBy({
-      email: seminarianDTO.email,
-    });
-    if (seminarian)
-      throw new HttpException('Your details already exists', HttpStatus.FORBIDDEN);
-      
     const newSeminarian = this.seminarianRepository.create(seminarianDTO);
     const data = await this.seminarianRepository.save(newSeminarian);
 

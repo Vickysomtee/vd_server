@@ -54,6 +54,13 @@ export class SeminariansController {
     return this.seminarianService.create(creatSeminarianDto);
   }
 
+  @Public()
+  @Post()
+  @UsePipes(ValidationPipe)
+  getByEmail(@Body() email: string) {
+    return this.seminarianService.findByEmail(email)
+  }
+
   @UseGuards(AtGuard)
   @Put(':id')
   @UsePipes(ValidationPipe)
