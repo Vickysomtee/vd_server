@@ -43,8 +43,8 @@ export class SeminariansController {
   @Post('upload_image/:email')
   @UsePipes(ValidationPipe)
   @UseInterceptors(FileInterceptor('profile_image'))
-  uploadSeminarianImage(@UploadedFile() file: Express.Multer.File, @Param() param) {
-    return this.seminarianService.uploadImage(file, param.email);
+  uploadSeminarianImage(@UploadedFile() file: Express.Multer.File) {
+    return this.seminarianService.uploadImage(file);
   }
 
   @Public()
