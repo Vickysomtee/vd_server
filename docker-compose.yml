@@ -1,0 +1,34 @@
+version: '3'
+services:
+  api:
+    container_name: vd_server
+    image: vickysomtee/vd_server
+    build:
+      context: ./
+    ports:
+      - ${CONTAINER_PORT}:${HOST_PORT}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - default  
+
+  mysql_db:
+    container_name: mysql_db
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+     - ${DB_PORT}:3306
+    volumes:
+      - mysql_db:/var/lib/mysql 
+    networks:
+      - default  
+networks:
+  default:      
+volumes:
+  mysql_db:
