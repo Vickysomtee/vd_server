@@ -1,4 +1,4 @@
-import { IsArray, IsDateString, IsEmail, IsNotEmpty, IsObject, IsString } from 'class-validator';
+import { IsArray, IsDateString, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { PastoralDuties } from './PastoralDuties.dto';
 
 export class CreateSeminarianDto {
@@ -41,6 +41,13 @@ export class CreateSeminarianDto {
 
   @IsString()
   current_class: string;
+
+  @IsString()
+  @IsNotEmpty()
+  formation_status: string;
+
+  @IsArray()
+  probation_duties: string[];
 
   @IsArray()
   pastoral_duties: PastoralDuties[];

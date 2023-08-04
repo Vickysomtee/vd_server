@@ -74,6 +74,12 @@ export class Seminarians {
   })
   formation_status: string;
 
+  @Column('simple-array', {
+    name: 'probation_duties',
+    nullable: true,
+  })
+  probation_duties: string[];
+
   @Column({
     type: 'json',
     name: 'pastorial_duties',
