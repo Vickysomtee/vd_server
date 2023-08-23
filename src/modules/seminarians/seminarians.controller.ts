@@ -40,7 +40,7 @@ export class SeminariansController {
   }
 
   @Public()
-  @Post('upload_image/')
+  @Post('upload_image')
   @UsePipes(ValidationPipe)
   @UseInterceptors(FileInterceptor('profile_image'))
   uploadSeminarianImage(@UploadedFile() file: Express.Multer.File) {

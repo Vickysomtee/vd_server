@@ -1,6 +1,7 @@
 version: '3'
 services:
   api:
+    platform: linux/amd64
     container_name: vd_server
     image: vickysomtee/vd_server
     build:

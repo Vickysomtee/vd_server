@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vd-test
+  namespace: test-cluster
+spec:
+  selector:
+    app: vd-server
+  ports:
+    - protocol: TCP
+      port: 5617
+      targetPort: 5617
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vd-test
+  namespace: test-cluster
+  labels:
+    app: vd_server
+spec:
+  selector:
+    matchLabels:
+      app: vd-server
+  template:
+    metadata:
+      labels:
+        app: vd-server
+    spec:
+      containers:
+      - name: vd-server
+        image: vickysomtee/vd_server:latest
+        env:
+        - name: NODE_ENV
+          value: "development"
+        ports:
+        - containerPort: 5617
+        imagePullPolicy: Always
+      serviceAccountName: default
