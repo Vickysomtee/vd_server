@@ -1,0 +1,28 @@
+name: Dockerize
+
+on:
+  push:
+    branches:
+      - test_dev_1
+
+jobs:
+  dockerize:
+    name: Dockerize
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      - name: Log into Docker Account
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t vd_server .
+      - name: Push Docker Image
+        run: |
+          docker tag igbo_api $DOCKER_USERNAME/vd_server
+          docker push $DOCKER_USERNAME/vd_server
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
