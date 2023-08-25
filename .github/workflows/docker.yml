@@ -22,7 +22,7 @@ jobs:
         run: docker build -t vd_server .
       - name: Push Docker Image
         run: |
-          docker tag igbo_api $DOCKER_USERNAME/vd_server
+          docker tag vd_server $DOCKER_USERNAME/vd_server
           docker push $DOCKER_USERNAME/vd_server
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
