@@ -19,6 +19,16 @@ export class SeminarianService {
     return this.seminarianRepository.find({ where: query });
   }
 
+  async verifySeminarian(email: string) {
+    const seminarian = await this.seminarianRepository.findOneBy({ email });
+
+    if (seminarian)
+      throw new HttpException(
+        'Your details already exists',
+        HttpStatus.FORBIDDEN,
+      );
+  }
+
   async getOne(id: number) {
     const seminarian = await this.seminarianRepository.findOneBy({ id });
 
@@ -42,16 +52,8 @@ export class SeminarianService {
   }
 
   async create(seminarianDTO: CreateSeminarianDto) {
-    const seminarian = await this.seminarianRepository.findOneBy({ email: seminarianDTO.email });
-
-    if (seminarian)
-      throw new HttpException(
-        'Your details already exists',
-        HttpStatus.FORBIDDEN,
-      );
-
     const newSeminarian = this.seminarianRepository.create(seminarianDTO);
-    const data = await this.seminarianRepository.save(newSeminarian);
+    await this.seminarianRepository.save(newSeminarian);
 
     return { message: 'Success', statusCode: HttpStatus.CREATED };
   }

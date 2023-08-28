@@ -40,6 +40,12 @@ export class SeminariansController {
   }
 
   @Public()
+  @Get('verify_seminarian/:email')
+  getSeminarianByEmail(@Param() params) {
+    return this.seminarianService.verifySeminarian(params.email)
+  }
+
+  @Public()
   @Post('upload_image/')
   @UsePipes(ValidationPipe)
   @UseInterceptors(FileInterceptor('profile_image'))
