@@ -27,6 +27,8 @@ export class SeminarianService {
         'Your details already exists',
         HttpStatus.FORBIDDEN,
       );
+
+      return {statusCode: HttpStatus.NOT_FOUND, message: 'Seminarian not found!'}
   }
 
   async getOne(id: number) {
