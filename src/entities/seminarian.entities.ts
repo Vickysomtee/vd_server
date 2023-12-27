@@ -57,6 +57,12 @@ export class Seminarians {
   seminary: string;
 
   @Column({
+    name: 'seminary_alias',
+    nullable: true,
+  })
+  seminary_alias: string;
+
+  @Column({
     name: 'seminary_level',
     nullable: false,
   })
