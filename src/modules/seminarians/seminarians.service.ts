@@ -28,7 +28,10 @@ export class SeminarianService {
         HttpStatus.FORBIDDEN,
       );
 
-      return {statusCode: HttpStatus.NOT_FOUND, message: 'Seminarian not found!'}
+    return {
+      statusCode: HttpStatus.NOT_FOUND,
+      message: 'Seminarian not found!',
+    };
   }
 
   async getOne(id: number) {
@@ -74,5 +77,50 @@ export class SeminarianService {
     const data = await this.seminarianRepository.save(seminarian);
 
     return { message: 'Success', statusCode: HttpStatus.OK, data };
+  }
+
+  async seminaryStats() {
+    const allSeminarians = await this.seminarianRepository.find();
+
+    const stjohnotcekpoma = await this.seminarianRepository.find({
+      where: { seminary_alias: 'stjohnotcekpoma' },
+    });
+    const stpetertaeruku = await this.seminarianRepository.find({
+      where: { seminary_alias: 'stpetertaeruku' },
+    });
+    const asuhiele = await this.seminarianRepository.find({
+      where: { seminary_alias: 'asuhiele' },
+    });
+    const stalberttgidowu_offonran = await this.seminarianRepository.find({
+      where: { seminary_alias: 'stalberttgidowu-offonran' },
+    });
+    const ssppbodija = await this.seminarianRepository.find({
+      where: { seminary_alias: 'ssppbodija' },
+    });
+    const pastoral = await this.seminarianRepository.find({
+      where: { seminary_level: 'pastoral year' },
+    });
+    const philosophy = await this.seminarianRepository.find({
+      where: { seminary_level: 'philosophy' },
+    });
+    const spiritual = await this.seminarianRepository.find({
+      where: { seminary_level: 'spiritual' },
+    });
+    const theology = await this.seminarianRepository.find({
+      where: { seminary_level: 'theology' },
+    });
+
+    return {
+      allSeminarians: allSeminarians.length,
+      stjohnotcekpoma: stjohnotcekpoma.length,
+      stpetertaeruku: stpetertaeruku.length,
+      asuhiele: asuhiele.length,
+      ssppbodija: ssppbodija.length,
+      stalberttgidowu_offonran: stalberttgidowu_offonran.length,
+      pastoral: pastoral.length,
+      philosophy: philosophy.length,
+      spiritual: spiritual.length,
+      theology: theology.length,
+    };
   }
 }

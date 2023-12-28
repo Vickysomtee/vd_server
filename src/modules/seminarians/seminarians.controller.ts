@@ -34,15 +34,21 @@ export class SeminariansController {
   }
 
   @UseGuards(AtGuard)
+  @Get('stats/all')
+  getSeminarianStats() {
+    return this.seminarianService.seminaryStats();
+  }
+
+  @UseGuards(AtGuard)
   @Get(':id')
   getSeminarian(@Param() param) {
-    return this.seminarianService.getOne(param.id)
+    return this.seminarianService.getOne(param.id);
   }
 
   @Public()
   @Get('verify_seminarian/:email')
   getSeminarianByEmail(@Param() params) {
-    return this.seminarianService.verifySeminarian(params.email)
+    return this.seminarianService.verifySeminarian(params.email);
   }
 
   @Public()
@@ -64,6 +70,6 @@ export class SeminariansController {
   @Put(':id')
   @UsePipes(ValidationPipe)
   updateSeminarian(@Body() data: CreateSeminarianDto, @Param() params) {
-    return this.seminarianService.update(params.id, data)
+    return this.seminarianService.update(params.id, data);
   }
 }
