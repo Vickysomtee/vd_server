@@ -15,8 +15,37 @@ export class SeminarianService {
     private cloudinary: CloudinaryService,
   ) {}
 
-  get(query) {
-    return this.seminarianRepository.find({ where: query });
+  async get(query) {
+    if (Object.keys(query).includes('seminary_level')) {
+      return this.seminarianRepository.find({
+        where: query,
+        order: { current_class: 'ASC' },
+      });
+    }
+
+    const spiritual = await this.seminarianRepository.find({
+      where: { seminary_level: 'Spiritual Year', ...query },
+      order: { current_class: 'ASC' },
+    });
+
+    const pastoral = await this.seminarianRepository.find({
+      where: { seminary_level: 'Pastoral Year', ...query },
+      order: { current_class: 'ASC' },
+    });
+
+    const philosophy = await this.seminarianRepository.find({
+      where: { seminary_level: 'Philosophy', ...query },
+      order: { current_class: 'ASC' },
+    });
+
+    const theology = await this.seminarianRepository.find({
+      where: { seminary_level: 'Theology', ...query },
+      order: { current_class: 'ASC' },
+    });
+
+    const seminarians = [...spiritual, ...pastoral, ...philosophy, ...theology];
+
+    return seminarians;
   }
 
   async verifySeminarian(email: string) {
@@ -110,6 +139,20 @@ export class SeminarianService {
       where: { seminary_level: 'theology' },
     });
 
+    // Formation Status
+
+    const active = await this.seminarianRepository.find({
+      where: { formation_status: 'active' },
+    });
+
+    const probation = await this.seminarianRepository.find({
+      where: { seminary_level: 'probation' },
+    });
+
+    const leave_of_absence = await this.seminarianRepository.find({
+      where: { seminary_level: 'Leave of absence' },
+    });
+
     return {
       allSeminarians: allSeminarians.length,
       stjohnotcekpoma: stjohnotcekpoma.length,
@@ -121,6 +164,9 @@ export class SeminarianService {
       philosophy: philosophy.length,
       spiritual: spiritual.length,
       theology: theology.length,
+      active_seminarians: active.length,
+      probation_seminarians: probation.length,
+      leave_of_absence_seminarians: leave_of_absence.length,
     };
   }
 }
